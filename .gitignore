@@ -1,5 +1,6 @@
 # ignore folders
 frames
 
-# ignore .mov files
+# ignore .mov .csv files
 *.mov
+*.csv
