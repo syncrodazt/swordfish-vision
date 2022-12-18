@@ -2,6 +2,7 @@
 frames
 photo box
 input
+output
 
 # ignore .mov .csv files
 *.mov
