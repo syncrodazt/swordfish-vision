@@ -36,12 +36,16 @@ end
 %%
 
 ts = 1:1/240:10;
-ts = ts(1:length(pos));
 px2cm = 0.098/900;
-plot(ts, (pos(:, 1)-origin(1))*px2cm)
+pos_cm = (pos(:, 1)-origin(1))*px2cm;
+pos_cm_trim = pos_cm(54:end, :);
+ts = ts(1:length(pos_cm_trim));
+
+plot(ts, pos_cm_trim)
 xlabel("time [sec]", "Interpreter", "latex")
 ylabel("x [m]", "Interpreter", "latex")
-set(gca, "TickLabelInterpreter", "latex")
+set(gca, "TickLabelInterpreter", "latex", "FontSize", 18)
+grid on
 % daspect([1 1 1])
 
 

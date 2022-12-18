@@ -37,11 +37,12 @@ end
 
 ts = 1:1/240:10;
 ts = ts(1:length(pos));
-px2cm = 9.8/60;
+px2cm = 0.098/900;
 plot(ts, (pos(:, 1)-origin(1))*px2cm)
 xlabel("time [sec]", "Interpreter", "latex")
-ylabel("y [px]", "Interpreter", "latex")
+ylabel("x [m]", "Interpreter", "latex")
 set(gca, "TickLabelInterpreter", "latex")
+set
 % daspect([1 1 1])
 
 
