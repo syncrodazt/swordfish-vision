@@ -9,10 +9,10 @@ def fn_detect(im, is_log, param, save_param):
     r_w = param["r_w"]
     
     # Initialize opencv windows
-    WINDOW_SCALE = 0.6
-    cv2.namedWindow("Swordfish Tail Tracking", cv2.WINDOW_NORMAL)
+    WINDOW_SCALE = 1
+    # cv2.namedWindow("Swordfish Tail Tracking", cv2.WINDOW_NORMAL)
     cv2.resizeWindow("Swordfish Tail Tracking", int((r_w-r_x)*WINDOW_SCALE), int((r_h-r_y)*WINDOW_SCALE))
-    cv2.namedWindow("Contour", cv2.WINDOW_NORMAL)
+    # cv2.namedWindow("Contour", cv2.WINDOW_NORMAL)
     cv2.resizeWindow("Contour", int((r_w-r_x)*WINDOW_SCALE), int((r_h-r_y)*WINDOW_SCALE))
     # cv2.resizeWindow("Swordfish Tail Tracking", 1080, 1920)
 
@@ -55,7 +55,8 @@ def fn_detect(im, is_log, param, save_param):
     FONT_FAM = cv2.FONT_HERSHEY_SIMPLEX
     cv2.circle(im, endpos, radius=1, color=(0, 0, 255), thickness=5)
 
-    rotation_center = [466, 929] # Define rotation center from the image
+    # rotation_center = [466, 929] # Define rotation center from the image
+    rotation_center = [560, 89] # Define rotation center from the image
     cv2.circle(im, rotation_center, radius=1, color=(0, 0, 255), thickness=5)
 
     cv2.line(im, rotation_center, endpos, (0, 255, 0), 2) # Draw line from rotation center to endpos

@@ -5,13 +5,13 @@ from fn_detect import fn_detect
 
 camera = 1; # Camera number
 is_save_data = False; # Save x, y coordinates of the swordfish tail to a csv file
-is_use_camera = False; # Use camera or video file
+is_use_camera = False; # Uase camera or video file
 # is_resize = True; # Crop image to only show the swordfish tail
 is_log = False; # Print out x, y coordinates of the swordfish tail in the terminal
 is_debug = False;
 input_folder = "input"
-filename = "swordfish 05" # Video file name
-extension = ".mp4" # Video file extension
+filename = "swordfish 08" # Video file name
+extension = ".mov" # Video file extension
 output_folder = "output"
 save_param = {"is_save": False,
               "filename": filename,
@@ -39,7 +39,11 @@ params = {"swordfish 01" : {"rotate": 180, "is_resize": False, "r_x": 0, "r_y": 
         "swordfish 03" : {"rotate": 180, "is_resize": True, "r_x": 50, "r_y": 0, "r_h": 700, "r_w": 720},
         "swordfish 04" : {"rotate": 0, "is_resize": True, "r_x": 0, "r_y": 0, "r_h": 1850, "r_w": 900},
         "swordfish 05" : {"rotate": 180, "is_resize": True, "r_x": 0, "r_y": 0, "r_h": 1850, "r_w": 900},
-        "camera" : {"rotate": 90, "is_resize": True, "r_x": 50, "r_y": 0, "r_h": 1700, "r_w": 1080}}
+        "swordfish 06" : {"rotate": 180, "is_resize": True, "r_x": 0, "r_y": 0, "r_h": 1920, "r_w": 1080},
+        "swordfish 07" : {"rotate": 180, "is_resize": False, "r_x": 0, "r_y": 0, "r_h": 1920, "r_w": 1080},
+        "swordfish 08" : {"rotate": 180, "is_resize": False, "r_x": 0, "r_y": 0, "r_h": 1920, "r_w": 1080},
+        "camera" : {"rotate": 270, "is_resize": True, "r_x": 100, "r_y": 0, "r_h": 1920, "r_w": 1080}}
+        # "camera" : {"rotate": 270, "is_resize": True, "r_x": 100, "r_y": 0, "r_h": 1080, "r_w": 1920}}
 
 if is_use_camera:
     locals().update(params["camera"]) # Extract parameters : r_x, r_y, r_h, r_w, is_resize, rotate
@@ -63,6 +67,8 @@ while vid.isOpened():
         im = cv2.rotate(im, cv2.ROTATE_90_CLOCKWISE)
     elif rotate == 180:
         im = cv2.rotate(im, cv2.ROTATE_180)
+    elif rotate == 270:
+        im = cv2.rotate(im, cv2.ROTATE_90_COUNTERCLOCKWISE)
         
     # Crop image so that only the swordfish tail is visible
     if is_resize:
