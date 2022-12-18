@@ -1,8 +1,8 @@
 # swordfish-vision
 
-fn_detect.py : Detects the fish in a video file and show the frames
-frame_detect.py : Apply fn_detect.py to an image file
-clip_detect.py : Apply fn_detect.py to a video file
+- fn_detect.py : Detects the fish in a video file and show the frames
+- frame_detect.py : Apply fn_detect.py to an image file
+- clip_detect.py : Apply fn_detect.py to a video file
 
 # TO DO
 - TODO Implement a robust pattern matching system.
