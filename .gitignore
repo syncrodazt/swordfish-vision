@@ -1,5 +1,7 @@
 # ignore folders
 frames
+photo box
+input
 
 # ignore .mov .csv files
 *.mov

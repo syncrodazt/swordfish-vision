@@ -2,7 +2,7 @@ close all;
 pos = csvread("swordfish 01 fix.csv");
 N = length(pos);
 origin = [500 200];
-figure('Position', [1440,453,753,885]);
+figure;
 i = 1;
 plot(-(pos(i, 1)-origin(1)), pos(i, 2)-origin(2), '.b')
 % scatter(-(pos(i, 1)-origin(1)), pos(i, 2)-origin(2), '.b', 'MarkerEdgeAlpha', i/N)
@@ -15,7 +15,7 @@ ylim([0 1920])
 % axis equal
 xlabel("x [px]", "Interpreter", "latex")
 ylabel("y [px]", "Interpreter", "latex")
-set(gca, "TickLabelInterpreter", "latex", "FontSize", 16)
+set(gca, "TickLabelInterpreter", "latex")
 daspect([1 1 1])
 grid on;
 hold on;
