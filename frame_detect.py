@@ -8,12 +8,12 @@ import cv2
 import os
 from fn_detect import fn_detect
 
-is_log = False
+is_log_fn = False
 
-input_folder = "input"
+input_folder = "frames/frames0103"
 output_folder = "output"
-filename = "swordfish 01" # Video file name
-extension = ".png" # Video file extension
+filename = "swordfish 08" # Video file name
+extension = ".jpg" # Video file extension
 save_param = {"is_save": True,
               "filename": filename,
               "extension": extension,
@@ -28,7 +28,11 @@ params = {"swordfish 01" : {"rotate": 180, "is_resize": False, "r_x": 0, "r_y": 
         "swordfish 03" : {"rotate": 180, "is_resize": True, "r_x": 50, "r_y": 0, "r_h": 700, "r_w": 720},
         "swordfish 04" : {"rotate": 0, "is_resize": True, "r_x": 0, "r_y": 0, "r_h": 1850, "r_w": 900},
         "swordfish 05" : {"rotate": 180, "is_resize": True, "r_x": 0, "r_y": 0, "r_h": 1850, "r_w": 900},
-        "camera" : {"rotate": 90, "is_resize": True, "r_x": 50, "r_y": 0, "r_h": 1700, "r_w": 1080}}
+        "swordfish 06" : {"rotate": 180, "is_resize": True, "r_x": 0, "r_y": 0, "r_h": 1920, "r_w": 1080},
+        "swordfish 07" : {"rotate": 180, "is_resize": False, "r_x": 0, "r_y": 0, "r_h": 1920, "r_w": 1080},
+        "swordfish 08" : {"rotate": 0, "is_resize": False, "r_x": 0, "r_y": 0, "r_h": 1920, "r_w": 1080},
+        "camera" : {"rotate": 270, "is_resize": True, "r_x": 100, "r_y": 0, "r_h": 1920, "r_w": 1080}}
+        # "camera" : {"rotate": 270, "is_resize": True, "r_x": 100, "r_y": 0, "r_h": 1080, "r_w": 1920}}
 
 
 locals().update(params[filename]) # Extract parameters : r_x, r_y, r_h, r_w, is_resize, rotate
@@ -66,7 +70,7 @@ print(f"contours: {len(contours)}")
 #     cv2.resizeWindow(f"Contour {contour_idx}", int(width*WINDOW_SCALE), int(height*WINDOW_SCALE))
 
 
-endpos = fn_detect(im, is_log=False, param=params[filename], save_param=save_param)
+endpos = fn_detect(im, is_log_fn=is_log_fn, param=params[filename], save_param=save_param)
 
 
 cv2.waitKey(0)

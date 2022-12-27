@@ -1,30 +1,36 @@
 close all;
-pos = csvread("swordfish 08.csv");
+pos = csvread("testing 01.csv");
 N = length(pos);
 origin = [560 89];
 figure;
 i = 1;
-plot(-(pos(i, 1)-origin(1)), pos(i, 2)-origin(2), '.b')
+plot(-(pos(i, 1)-origin(1)), pos(i, 2)-origin(2), '.b', 'MarkerSize',8)
 % scatter(-(pos(i, 1)-origin(1)), pos(i, 2)-origin(2), '.b', 'MarkerEdgeAlpha', i/N)
 % xlim([0 720])
 % ylim([0 1280])
 % xlim([0 1080])
 % ylim([0 1920])
-xlim([-1080/2 1080/2])
-ylim([0 1920])
+% xlim([-1080/2 1080/2])
+% ylim([0 1920])
+xlim([-0.04 0.04])
+ylim([0 0.15])
 % axis equal
 xlabel("x [px]", "Interpreter", "latex")
 ylabel("y [px]", "Interpreter", "latex")
-set(gca, "TickLabelInterpreter", "latex")
+set(gca, "TickLabelInterpreter", "latex", "FontSize", 18)
 daspect([1 1 1])
 grid on;
 hold on;
 
+known_cm = 9.8*0.01; % m
+% known_pixel = 639; % pixel 
+known_pixel = 900; % pixel
+px2cm = known_cm / known_pixel;
 
 for i = 2:N
 % for i = 2:100
 %     cla
-    plot(-(pos(i, 1)-origin(1)), pos(i, 2)-origin(2), '.b')
+      plot(-(pos(i, 1)-origin(1))*px2cm, (pos(i, 2)-origin(2))*px2cm, '.b', 'MarkerSize',8)
 %     scatter(-(pos(i, 1)-origin(1)), pos(i, 2)-origin(2), '.b', 'MarkerEdgeAlpha', i/N)
 %     xlim([0 1080])
 %     ylim([0 1920])
@@ -33,18 +39,242 @@ for i = 2:N
     pause(0.001)
 end
 
+%% origin_cm
+pos_cm1 = csvread("testing 01_origin_cm.csv");
+pos_cm2 = csvread("testing 02_origin_cm.csv");
+pos_cm3 = csvread("testing 03_origin_cm.csv");
+pos_cm4 = csvread("testing 04_origin_cm.csv");
+pos_cm5 = csvread("testing 05_origin_cm.csv");
+N1 = length(pos_cm1);
+N2 = length(pos_cm2);
+N3 = length(pos_cm3);
+N4 = length(pos_cm4);
+N5 = length(pos_cm5);
+ts1 = (1:N1)/120;
+ts2 = (1:N2)/120;
+ts3 = (1:N3)/120;
+ts4 = (1:N4)/120;
+ts5 = (1:N5)/120;
+% pos_cm_trim = pos_cm(54:end-54, :);
+pos_cm_trim11 = pos_cm1(:, :);
+pos_cm_trim21 = pos_cm2(:, :);
+pos_cm_trim31 = pos_cm3(:, :);
+pos_cm_trim41 = pos_cm4(:, :);
+pos_cm_trim51 = pos_cm5(:, :);
+ts11 = ts(1:length(pos_cm_trim11));
+% ts = ts-min(ts);
+
+figure;
+subplot(5, 1, 1)
+plot(ts1(:), pos_cm_trim11(:, 1)-pos_cm1(1,1), 'LineWidth', 1.5)
+
+subplot(5, 1, 2)
+plot(t2(:), pos_cm_trim21(:, 1)-pos_cm2(1,1), 'LineWidth', 1.5)
+
+subplot(5, 1, 3)
+plot(ts(:), pos_cm_trim31(:, 1)-pos_cm3(1,1), 'LineWidth', 1.5)
+
+subplot(5, 1, 4)
+plot(ts(:), pos_cm_trim41(:, 1)-pos_cm4(1,1), 'LineWidth', 1.5)
+
+subplot(5, 1, 5)
+plot(ts(:), pos_cm_trim51(:, 1)-pos_cm5(1,1), 'LineWidth', 1.5)
+
+
+% scatter(ts(:), pos_cm_trim(:, 1), '.b')
+xlabel("time [sec]", "Interpreter", "latex")
+ylabel("$A_t$ [m]", "Interpreter", "latex")
+% yticks(-0.03:0.01:0.03)
+% ylim([-0.03 0.03])
+% xlim([0 3.5])
+set(gca, "TickLabelInterpreter", "latex", "FontSize", 18)
+grid on
+grid minor
+
 %%
 
 ts = 1:1/240:10;
-ts = ts(1:length(pos));
-px2cm = 0.098/900;
-plot(ts, (pos(:, 1)-origin(1))*px2cm)
-xlabel("time [sec]", "Interpreter", "latex")
-ylabel("x [m]", "Interpreter", "latex")
-set(gca, "TickLabelInterpreter", "latex")
-set
-% daspect([1 1 1])
+known_cm = 9.8*0.01; % m
+% known_pixel = 639; % pixel 
+known_pixel = 900; % pixel
+px2cm = known_cm / known_pixel;
+% px2cm = 0.098/900;
+pos_cm = (pos(:, :)-origin)*px2cm;
+pos_cm_trim = pos_cm(54:end-54, :);
+ts = ts(1:length(pos_cm_trim));
+ts = ts-min(ts);
 
+f1 = figure;
+f1.Position = [1017,361,1303,420];
+set(gcf,'color','w');
+% sfh1 = subplot(1,2,1);
+axes1 = axes('Parent',f1,...
+    'Position',[0.13 0.16495236481194 0.188495778971604 0.76004763518806]);
+hold(axes1,'on');
+% sfh1.Position = [0.13,0.164952364785331,0.160099769762088,0.760047635214669];
+% sfh1.OuterPosition = [0.058001957939972,0,0.235406099292202,0.994943033915461];
+N = length(pos);
+origin = [560 89];
+i = 1;
+plot(pos_cm_trim(i, 2), pos_cm_trim(i, 1), '.b', 'MarkerSize',8, 'Parent', axes1)
+xlim([0 0.15])
+ylim([-0.03 0.03])
+yticks(-0.03:0.01:0.03)
+% axis equal
+xlabel("y [m]", "Interpreter", "latex")
+ylabel("x [m]", "Interpreter", "latex")
+set(gca, "TickLabelInterpreter", "latex", "FontSize", 18)
+% daspect([1 1 1])
+grid on;
+hold on;
+
+% sfh2 = subplot(1,2,2);
+axes2 = axes('Parent',f1,...
+    'Position',[0.440521872601688 0.16495236481194 0.464478127398312 0.76004763518806]);
+hold(axes2,'on');
+% sfh2.Position =  [0.415195702225633,0.164952364785331,0.489804297774367,0.760047635214669];
+% sfh2.OuterPosition =  [0.340127821332144,0,0.622187908004919,0.994943033915461];
+i = 1;
+% plot(ts(i), pos_cm_trim(i, 1), 'LineWidth', 1.5)
+scatter(ts(i), pos_cm_trim(i, 1), '.b', 'Parent', axes2)
+xlabel("time [sec]", "Interpreter", "latex")
+ylabel("$A_t$ [m]", "Interpreter", "latex")
+xticks(0:0.5:3.5)
+yticks(-0.03:0.01:0.03)
+ylim([-0.03 0.03])
+xlim([0 3.5])
+set(gca, "TickLabelInterpreter", "latex", "FontSize", 18)
+grid on
+grid minor
+% daspect([0.25 0.01 1])
+hold on;
+% for i = 2:100
+pause(15)
+for i = 2:length(pos_cm_trim)
+%     subplot(1,2,1)
+    cla(axes1)
+    plot(pos_cm_trim(i, 2), pos_cm_trim(i, 1), '.b', 'MarkerSize',8, 'Parent', axes1)
+
+%     subplot(1,2,2)
+    scatter(ts(i), pos_cm_trim(i, 1), '.b', 'Parent', axes2)
+    pause(0.000001)
+end
+hold off
+
+
+
+% for i = 2:length(pos_cm_trim)
+% %     plot(ts(i), pos_cm_trim(i, 1), 'LineWidth', 1.5)
+%     scatter(ts(i), pos_cm_trim(i, 1), '.b')
+%     pause(0.0001)
+% % daspect([1 1 1])
+% end
+% hold off
+
+%% slow
+
+pos = csvread("testing 01.csv");
+N = length(pos);
+% ts = 1:1/240:10;
+ts = (1:N)/120;
+known_cm = 9.8*0.01; % m
+% known_pixel = 639; % pixel 
+known_pixel = 900; % pixel
+px2cm = known_cm / known_pixel;
+% px2cm = 0.098/900;
+pos_cm = (pos(:, :)-origin)*px2cm;
+pos_cm_trim = pos_cm(:, :);
+ts = ts(1:length(pos_cm_trim));
+ts = ts-min(ts);
+
+% figure;
+set(gcf,'color','w');
+sfh1 = subplot(1,2,1);
+N = length(pos);
+origin = [560 89];
+i = 1;
+plot(pos_cm_trim(i, 2), pos_cm_trim(i, 1), '.b', 'MarkerSize',8)
+hold on;
+
+sfh2 = subplot(1,2,2);
+i = 1;
+% plot(ts(i), pos_cm_trim(i, 1), 'LineWidth', 1.5)
+scatter(ts(i), pos_cm_trim(i, 1), '.b')
+% daspect([0.25 0.01 1])
+hold on;
+% for i = 2:100
+for i = 2:length(pos_cm_trim)
+    subplot(1,2,1)
+    cla
+    plot(pos_cm_trim(i, 2), pos_cm_trim(i, 1), '.b', 'MarkerSize',8)
+
+    subplot(1,2,2)
+    scatter(ts(i), pos_cm_trim(i, 1), '.b')
+%     pause(0.000001)
+end
+hold off
+
+
+
+% for i = 2:length(pos_cm_trim)
+% %     plot(ts(i), pos_cm_trim(i, 1), 'LineWidth', 1.5)
+%     scatter(ts(i), pos_cm_trim(i, 1), '.b')
+%     pause(0.0001)
+% % daspect([1 1 1])
+% end
+% hold off
+
+%% fast
+
+pos = csvread("testing 01.csv");
+N = length(pos);
+% ts = 1:1/240:10;
+ts = (1:N)/120;
+known_cm = 9.8*0.01; % m
+% known_pixel = 639; % pixel 
+known_pixel = 900; % pixel
+px2cm = known_cm / known_pixel;
+% px2cm = 0.098/900;
+pos_cm = (pos(:, :)-origin)*px2cm;
+pos_cm_trim = pos_cm(:, :);
+ts = ts(1:length(pos_cm_trim));
+ts = ts-min(ts);
+
+% figure;
+set(gcf,'color','w');
+sfh1 = subplot(1,2,1);
+N = length(pos);
+origin = [560 89];
+i = 1;
+plot(pos_cm_trim(i, 2), pos_cm_trim(i, 1), '.b', 'MarkerSize',8)
+
+sfh2 = subplot(1,2,2);
+i = 1;
+% plot(ts(i), pos_cm_trim(i, 1), 'LineWidth', 1.5)
+scatter(ts(i), pos_cm_trim(i, 1), '.b')
+% daspect([0.25 0.01 1])
+hold on;
+% for i = 2:100
+for i = 2:length(pos_cm_trim)
+    subplot(1,2,1)
+    cla
+    plot(pos_cm_trim(i, 2), pos_cm_trim(i, 1), '.b', 'MarkerSize',8)
+
+    subplot(1,2,2)
+    scatter(ts(i), pos_cm_trim(i, 1), '.b')
+%     pause(0.000001)
+end
+hold off
+
+
+
+% for i = 2:length(pos_cm_trim)
+% %     plot(ts(i), pos_cm_trim(i, 1), 'LineWidth', 1.5)
+%     scatter(ts(i), pos_cm_trim(i, 1), '.b')
+%     pause(0.0001)
+% % daspect([1 1 1])
+% end
+% hold off
 
 
 

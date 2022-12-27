@@ -1,4 +1,3 @@
-close all;
 pos = csvread("swordfish 01 fix.csv");
 N = length(pos);
 origin = [500 200];

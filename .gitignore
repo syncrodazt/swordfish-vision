@@ -7,3 +7,10 @@ output
 # ignore .mov .csv files
 *.mov
 *.csv
+*.mp4
+*.avi
+*.rar
+*.mat
+*.xlsx
+*.asv
+**/*

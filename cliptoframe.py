@@ -1,11 +1,11 @@
 import cv2
-vid = cv2.VideoCapture('swordfish 01.mov')
+vid = cv2.VideoCapture('input/swordfish 08.mov')
 
 count = 0
-output_path = "./frames0102/"
+output_path = "frames/frames0103/"
 t_str = ""
 is_save_time = 1
-is_save_image = 0
+is_save_image = 1
 while vid.isOpened():
     ret, frame = vid.read()
     if not ret:
@@ -17,7 +17,7 @@ while vid.isOpened():
         cv2.imwrite(output_path + "frame%04d.jpg" % count, frame)
     t_str = t_str + str(vid.get(cv2.CAP_PROP_POS_MSEC)) + '\n'
     count = count + 1
-    if count == 100:
+    if count == 10:
         break
     if cv2.waitKey(10) & 0xFF == ord('q'):
         break
